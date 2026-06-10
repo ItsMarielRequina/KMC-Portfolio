@@ -18,11 +18,13 @@ export default function Hero() {
     <div className="min-h-screen flex flex-col items-center justify-center px-6 pt-24 pb-16 text-center">
 
       {/* Avatar ring */}
-      <motion.div {...fadeUp(0.1)} className="mb-8 relative">
-        <div className="w-28 h-28 rounded-full bg-gradient-to-br from-violet-500 via-blue-500 to-emerald-400 p-[2px] mx-auto">
-          <div className="w-full h-full rounded-full bg-[#0d1320] flex items-center justify-center text-4xl font-black text-white select-none">
-            {profile.name.charAt(0)}
-          </div>
+      <motion.div {...fadeUp(0.1)} className="mb-8 relative translate-y-6">
+      <div className="w-40 h-40 md:w-48 md:h-48 rounded-full bg-gradient-to-br from-violet-500 via-blue-500 to-emerald-400 p-[3px] mx-auto shadow-2xl shadow-violet-500/20">
+          <img
+            src="/profile (2).jpg"
+            alt={profile.name}
+            className="w-full h-full rounded-full object-cover"
+          />
         </div>
         {profile.available && (
           <span className="absolute bottom-1 right-1 w-4 h-4 bg-emerald-400 border-2 border-[#080c14] rounded-full" />
@@ -89,13 +91,13 @@ export default function Hero() {
           View My Work
         </button>
         <a
-          href={profile.resumeUrl}
-          download
-          className="flex items-center gap-2 px-6 py-3 bg-white/8 hover:bg-white/14 border border-white/12 text-white/80 hover:text-white font-bold rounded-xl text-sm transition-all duration-200 hover:scale-105"
-        >
-          <FiDownload size={14} />
-          Resume
-        </a>
+                href="/resume.jpg"
+                download
+                className="flex items-center gap-2 px-8 py-3.5 rounded-full bg-white/5 backdrop-blur-xl border border-white/10 text-slate-300 font-semibold hover:bg-white/10 hover:scale-105 transition-all duration-200"
+              >
+                <FiDownload size={16} />
+                Resume
+              </a>
         <button
           onClick={() => scrollTo("contact")}
           className="px-6 py-3 bg-white/8 hover:bg-white/14 border border-white/12 text-white/80 hover:text-white font-bold rounded-xl text-sm transition-all duration-200 hover:scale-105"

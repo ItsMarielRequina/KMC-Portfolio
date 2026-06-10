@@ -8,10 +8,9 @@ export default function Footer() {
         <p className="text-white/25 text-sm">
           © {new Date().getFullYear()}{" "}
           <span className="text-white/40 font-semibold">{profile.name}</span>
-          . Built with React + Tailwind CSS + Framer Motion.
         </p>
         <p className="text-white/20 text-xs">
-          Designed & developed with ☕ in Cotabato City
+          Designed & developed with ☕ in Davao City
         </p>
       </div>
     </footer>

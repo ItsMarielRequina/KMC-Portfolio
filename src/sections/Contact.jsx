@@ -143,7 +143,7 @@ export default function Contact() {
                 onChange={handleChange}
                 required
                 rows={5}
-                placeholder="Hi Mar, I'd like to talk about..."
+                placeholder="Hi Kaella, I'd like to talk about..."
                 className="w-full bg-white/5 border border-white/10 focus:border-violet-500/50 focus:bg-white/8 rounded-xl px-4 py-3 text-white placeholder-white/20 text-sm outline-none transition-all duration-200 resize-none"
               />
             </div>
