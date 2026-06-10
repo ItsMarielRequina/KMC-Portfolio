@@ -82,12 +82,6 @@ export const experience = [
     type: "Internship",
     color: "#7c3aed",
     bullets: [
-      "Built a full-stack Procurement Management System from scratch using Laravel, Blade, and MySQL",
-      "Designed and implemented multi-role workflows: End-User, RD Approver, BAC, FA II, and Cash sections",
-      "Deployed the production system on Railway with automated migrations and environment configuration",
-      "Developed Audit Logs, Attendance tracking, Report Issue, and real-time Notification modules",
-      "Wireframed the full UI in Figma before implementation across 8+ role-specific dashboards",
-      "Resolved Git conflicts, managed branching strategy, and reviewed teammates' pull requests",
     ],
   },
 ];
