@@ -1,54 +1,73 @@
-// src/sections/Contact.jsx
+
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Section, SectionHeader, Reveal } from "../components/Section";
 import { profile } from "../data/portfolio";
 import {
-  FiMail, FiGithub, FiLinkedin, FiFacebook,
-  FiSend, FiCheckCircle, FiAlertCircle,
+  FiMail,
+  FiGithub,
+  FiLinkedin,
+  FiFacebook,
+  FiSend,
+  FiCheckCircle,
+  FiAlertCircle,
 } from "react-icons/fi";
 
 const CONTACT_LINKS = [
-  { label: "Email",    value: profile.email,    href: `mailto:${profile.email}`,  Icon: FiMail },
-  { label: "GitHub",   value: profile.github,   href: profile.github,             Icon: FiGithub },
-  { label: "LinkedIn", value: profile.linkedin, href: profile.linkedin,           Icon: FiLinkedin },
-  { label: "Facebook", value: profile.facebook, href: profile.facebook,           Icon: FiFacebook },
+  {
+    label: "Email",
+    value: profile.email,
+    href: `mailto:${profile.email}`,
+    Icon: FiMail,
+  },
+  {
+    label: "GitHub",
+    value: profile.github,
+    href: profile.github,
+    Icon: FiGithub,
+  },
+  {
+    label: "LinkedIn",
+    value: profile.linkedin,
+    href: profile.linkedin,
+    Icon: FiLinkedin,
+  },
+  {
+    label: "Facebook",
+    value: profile.facebook,
+    href: profile.facebook,
+    Icon: FiFacebook,
+  },
 ];
 
 export default function Contact() {
-  const [form, setForm] = useState({ name: "", email: "", message: "" });
-  const [status, setStatus] = useState("idle"); // idle | sending | success | error
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    message: "",
+  });
+
+  const [status, setStatus] = useState("idle");
 
   const handleChange = (e) =>
-    setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+    setForm((prev) => ({
+      ...prev,
+      [e.target.name]: e.target.value,
+    }));
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setStatus("sending");
 
-    // ── EmailJS integration ───────────────────────────────────────────────────
-    // 1. Go to https://www.emailjs.com/ and create a free account
-    // 2. Create a service, email template, and get your public key
-    // 3. Uncomment and fill in the values below:
-    //
-    // import emailjs from "@emailjs/browser";
-    // try {
-    //   await emailjs.send(
-    //     "YOUR_SERVICE_ID",
-    //     "YOUR_TEMPLATE_ID",
-    //     { from_name: form.name, from_email: form.email, message: form.message },
-    //     "YOUR_PUBLIC_KEY"
-    //   );
-    //   setStatus("success");
-    // } catch {
-    //   setStatus("error");
-    // }
-    // ─────────────────────────────────────────────────────────────────────────
-
-    // Demo: simulate success after 1.5s
     await new Promise((r) => setTimeout(r, 1500));
+
     setStatus("success");
-    setForm({ name: "", email: "", message: "" });
+
+    setForm({
+      name: "",
+      email: "",
+      message: "",
+    });
   };
 
   return (
@@ -59,13 +78,14 @@ export default function Contact() {
         subtitle="Have a project in mind, or just want to say hi? I'm open to new opportunities."
       />
 
-      <div className="grid lg:grid-cols-2 gap-12">
-        {/* Left — contact info */}
+      <div className="grid lg:grid-cols-2 gap-10">
+        {/* Contact Info */}
         <Reveal>
           <div>
-            <p className="text-white/55 text-base leading-relaxed mb-8">
-              I'm currently looking for internship or junior developer opportunities after
-              graduation. Feel free to reach out — I usually reply within 24 hours.
+            <p className="text-slate-600 text-base leading-relaxed mb-8">
+              I'm currently looking for internship and junior developer
+              opportunities. Feel free to reach out — I usually reply within
+              24 hours.
             </p>
 
             <div className="space-y-3">
@@ -75,14 +95,36 @@ export default function Contact() {
                   href={href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group flex items-center gap-4 p-4 bg-white/[0.04] hover:bg-white/[0.08] border border-white/8 hover:border-violet-500/30 rounded-xl transition-all duration-200"
+                  className="
+                    group
+                    flex
+                    items-center
+                    gap-4
+                    p-4
+                    bg-white/80
+                    backdrop-blur-xl
+                    border
+                    border-sky-100
+                    rounded-2xl
+                    shadow-md
+                    shadow-sky-100/30
+                    hover:border-sky-300
+                    hover:-translate-y-1
+                    hover:shadow-lg
+                    transition-all
+                    duration-300
+                  "
                 >
-                  <div className="w-9 h-9 rounded-lg bg-violet-500/10 border border-violet-500/20 flex items-center justify-center text-violet-400 shrink-0">
-                    <Icon size={16} />
+                  <div className="w-11 h-11 rounded-xl bg-sky-100 border border-sky-200 flex items-center justify-center text-sky-600 shrink-0">
+                    <Icon size={17} />
                   </div>
+
                   <div>
-                    <p className="text-white/35 text-xs mb-0.5">{label}</p>
-                    <p className="text-white/80 group-hover:text-white text-sm font-semibold transition-colors truncate">
+                    <p className="text-slate-400 text-xs mb-1">
+                      {label}
+                    </p>
+
+                    <p className="text-slate-700 group-hover:text-sky-700 text-sm font-semibold transition-colors truncate">
                       {value}
                     </p>
                   </div>
@@ -92,19 +134,31 @@ export default function Contact() {
           </div>
         </Reveal>
 
-        {/* Right — contact form */}
+        {/* Contact Form */}
         <Reveal delay={0.15}>
           <form
             onSubmit={handleSubmit}
-            className="bg-white/[0.04] border border-white/8 rounded-2xl p-6 space-y-4"
+            className="
+              bg-white/80
+              backdrop-blur-xl
+              border
+              border-sky-100
+              rounded-3xl
+              p-6
+              shadow-lg
+              shadow-sky-100/30
+              space-y-4
+            "
           >
-            <h3 className="text-white font-bold text-base mb-2">Send a Message</h3>
+            <h3 className="text-slate-800 font-bold text-lg">
+              Send a Message
+            </h3>
 
-            {/* Name */}
             <div>
-              <label className="block text-white/40 text-xs font-semibold mb-1.5 uppercase tracking-wider">
+              <label className="block text-slate-500 text-xs font-semibold mb-2 uppercase tracking-wider">
                 Your Name
               </label>
+
               <input
                 type="text"
                 name="name"
@@ -112,15 +166,28 @@ export default function Contact() {
                 onChange={handleChange}
                 required
                 placeholder="Juan Dela Cruz"
-                className="w-full bg-white/5 border border-white/10 focus:border-violet-500/50 focus:bg-white/8 rounded-xl px-4 py-3 text-white placeholder-white/20 text-sm outline-none transition-all duration-200"
+                className="
+                  w-full
+                  bg-white
+                  border
+                  border-sky-100
+                  focus:border-sky-400
+                  rounded-xl
+                  px-4
+                  py-3
+                  text-slate-700
+                  placeholder-slate-400
+                  outline-none
+                  transition
+                "
               />
             </div>
 
-            {/* Email */}
             <div>
-              <label className="block text-white/40 text-xs font-semibold mb-1.5 uppercase tracking-wider">
+              <label className="block text-slate-500 text-xs font-semibold mb-2 uppercase tracking-wider">
                 Your Email
               </label>
+
               <input
                 type="email"
                 name="email"
@@ -128,15 +195,28 @@ export default function Contact() {
                 onChange={handleChange}
                 required
                 placeholder="juan@email.com"
-                className="w-full bg-white/5 border border-white/10 focus:border-violet-500/50 focus:bg-white/8 rounded-xl px-4 py-3 text-white placeholder-white/20 text-sm outline-none transition-all duration-200"
+                className="
+                  w-full
+                  bg-white
+                  border
+                  border-sky-100
+                  focus:border-sky-400
+                  rounded-xl
+                  px-4
+                  py-3
+                  text-slate-700
+                  placeholder-slate-400
+                  outline-none
+                  transition
+                "
               />
             </div>
 
-            {/* Message */}
             <div>
-              <label className="block text-white/40 text-xs font-semibold mb-1.5 uppercase tracking-wider">
+              <label className="block text-slate-500 text-xs font-semibold mb-2 uppercase tracking-wider">
                 Message
               </label>
+
               <textarea
                 name="message"
                 value={form.message}
@@ -144,42 +224,77 @@ export default function Contact() {
                 required
                 rows={5}
                 placeholder="Hi Kaella, I'd like to talk about..."
-                className="w-full bg-white/5 border border-white/10 focus:border-violet-500/50 focus:bg-white/8 rounded-xl px-4 py-3 text-white placeholder-white/20 text-sm outline-none transition-all duration-200 resize-none"
+                className="
+                  w-full
+                  bg-white
+                  border
+                  border-sky-100
+                  focus:border-sky-400
+                  rounded-xl
+                  px-4
+                  py-3
+                  text-slate-700
+                  placeholder-slate-400
+                  outline-none
+                  resize-none
+                  transition
+                "
               />
             </div>
 
-            {/* Submit */}
             <button
               type="submit"
               disabled={status === "sending" || status === "success"}
-              className="w-full flex items-center justify-center gap-2 py-3 bg-gradient-to-r from-violet-600 to-blue-600 hover:from-violet-500 hover:to-blue-500 disabled:opacity-60 disabled:cursor-not-allowed text-white font-bold rounded-xl text-sm transition-all duration-200 hover:scale-[1.02] active:scale-[0.98]"
+              className="
+                w-full
+                flex
+                items-center
+                justify-center
+                gap-2
+                py-3
+                rounded-xl
+                font-semibold
+                text-white
+                bg-gradient-to-r
+                from-sky-500
+                via-cyan-500
+                to-blue-500
+                hover:scale-[1.02]
+                transition-all
+                duration-300
+                shadow-lg
+                shadow-sky-300/30
+              "
             >
               {status === "sending" ? (
                 <>
                   <motion.span
                     animate={{ rotate: 360 }}
-                    transition={{ repeat: Infinity, duration: 0.8, ease: "linear" }}
+                    transition={{
+                      repeat: Infinity,
+                      duration: 0.8,
+                      ease: "linear",
+                    }}
                     className="inline-block w-4 h-4 border-2 border-white/30 border-t-white rounded-full"
                   />
-                  Sending…
+                  Sending...
                 </>
               ) : status === "success" ? (
                 <>
-                  <FiCheckCircle size={15} />
+                  <FiCheckCircle size={16} />
                   Message Sent!
                 </>
               ) : (
                 <>
-                  <FiSend size={14} />
+                  <FiSend size={15} />
                   Send Message
                 </>
               )}
             </button>
 
-            {/* Error state */}
             {status === "error" && (
-              <p className="flex items-center gap-1.5 text-red-400 text-xs">
-                <FiAlertCircle size={13} />
+              <p className="flex items-center gap-2 text-red-500 text-sm">
+                <FiAlertCircle />
                 Something went wrong. Try emailing me directly.
               </p>
             )}
@@ -189,3 +304,4 @@ export default function Contact() {
     </Section>
   );
 }
+

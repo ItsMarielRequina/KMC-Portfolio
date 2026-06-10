@@ -1,6 +1,7 @@
+
 // src/sections/Projects.jsx
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { Section, SectionHeader, StaggerReveal } from "../components/Section";
 import { projects } from "../data/portfolio";
 import { FiGithub, FiExternalLink } from "react-icons/fi";
@@ -17,21 +18,36 @@ export default function Projects() {
       <SectionHeader
         eyebrow="Portfolio"
         title="Projects"
-        subtitle="Things I've built — from government systems to side projects."
+        subtitle="A collection of academic, internship, and personal projects I've developed."
       />
 
-      <StaggerReveal stagger={0.12} className="grid md:grid-cols-2 gap-5 mb-6">
+      <StaggerReveal
+        stagger={0.12}
+        className="grid md:grid-cols-2 gap-6 mb-8"
+      >
         {visible.map((project) => (
           <ProjectCard key={project.id} project={project} />
         ))}
       </StaggerReveal>
 
-      {/* Show more / less toggle */}
       {rest.length > 0 && (
-        <div className="flex justify-center mt-4">
+        <div className="flex justify-center">
           <button
             onClick={() => setShowAll(!showAll)}
-            className="px-5 py-2.5 bg-white/6 hover:bg-white/10 border border-white/10 text-white/60 hover:text-white text-sm font-semibold rounded-xl transition-all duration-200"
+            className="
+              px-6 py-3
+              rounded-full
+              bg-white/80
+              backdrop-blur-xl
+              border border-sky-100
+              shadow-lg shadow-sky-100/40
+              text-slate-700
+              font-semibold
+              hover:scale-105
+              hover:border-sky-300
+              hover:text-sky-700
+              transition-all duration-300
+            "
           >
             {showAll ? "Show Less" : `Show ${rest.length} More`}
           </button>
@@ -44,76 +60,127 @@ export default function Projects() {
 function ProjectCard({ project }) {
   return (
     <motion.div
-      whileHover={{ y: -4 }}
-      transition={{ duration: 0.2 }}
-      className="group relative flex flex-col bg-white/[0.04] hover:bg-white/[0.07] border border-white/8 hover:border-white/16 rounded-2xl p-6 transition-colors duration-300 overflow-hidden"
+      whileHover={{ y: -8 }}
+      transition={{ duration: 0.25 }}
+      className="
+        group
+        relative
+        flex
+        flex-col
+        overflow-hidden
+        rounded-3xl
+        bg-white/80
+        backdrop-blur-xl
+        border
+        border-sky-100
+        shadow-lg
+        shadow-sky-100/40
+        hover:shadow-2xl
+        hover:shadow-sky-200/50
+        hover:border-sky-200
+        p-6
+        transition-all
+        duration-300
+      "
     >
-      {/* Glow on hover */}
+      {/* Hover Glow */}
       <div
-        className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl pointer-events-none"
+        className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
         style={{
-          background: `radial-gradient(400px circle at 50% 0%, ${project.color}12, transparent)`,
+          background: `radial-gradient(500px circle at top, ${project.color}15, transparent)`,
         }}
       />
 
-      {/* Top row */}
-      <div className="flex items-start justify-between mb-4">
+      {/* Top Section */}
+      <div className="flex items-start justify-between mb-5 relative z-10">
         <div
-          className="w-12 h-12 rounded-xl flex items-center justify-center text-2xl"
-          style={{ backgroundColor: project.color + "20", border: `1px solid ${project.color}30` }}
+          className="w-14 h-14 rounded-2xl flex items-center justify-center text-2xl"
+          style={{
+            backgroundColor: project.color + "15",
+            border: `1px solid ${project.color}30`,
+          }}
         >
           {project.emoji}
         </div>
 
-        {/* Links */}
         <div className="flex gap-2">
           {project.github && (
             <a
               href={project.github}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-8 h-8 flex items-center justify-center rounded-lg bg-white/6 hover:bg-white/12 border border-white/8 text-white/40 hover:text-white transition-all"
+              className="
+                w-9 h-9
+                rounded-xl
+                flex
+                items-center
+                justify-center
+                bg-white
+                border
+                border-slate-200
+                text-slate-500
+                hover:text-sky-600
+                hover:border-sky-300
+                transition-all
+              "
             >
-              <FiGithub size={14} />
+              <FiGithub size={16} />
             </a>
           )}
+
           {project.live && (
             <a
               href={project.live}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-8 h-8 flex items-center justify-center rounded-lg bg-white/6 hover:bg-white/12 border border-white/8 text-white/40 hover:text-white transition-all"
+              className="
+                w-9 h-9
+                rounded-xl
+                flex
+                items-center
+                justify-center
+                bg-white
+                border
+                border-slate-200
+                text-slate-500
+                hover:text-sky-600
+                hover:border-sky-300
+                transition-all
+              "
             >
-              <FiExternalLink size={14} />
+              <FiExternalLink size={16} />
             </a>
           )}
         </div>
       </div>
 
-      {/* Name + desc */}
-      <h3 className="text-white font-bold text-base mb-2 group-hover:text-violet-200 transition-colors">
+      {/* Project Name */}
+      <h3 className="relative z-10 text-slate-800 font-bold text-lg mb-2 group-hover:text-sky-700 transition-colors">
         {project.name}
       </h3>
-      <p className="text-white/50 text-sm leading-relaxed mb-5 flex-1">
+
+      {/* Description */}
+      <p className="relative z-10 text-slate-600 text-sm leading-relaxed mb-6 flex-1">
         {project.description}
       </p>
 
-      {/* Tech tags */}
-      <div className="flex flex-wrap gap-1.5">
-        {project.tech.map((t) => (
+      {/* Technologies */}
+      <div className="relative z-10 flex flex-wrap gap-2">
+        {project.tech.map((tech) => (
           <span
-            key={t}
-            className="text-xs font-semibold px-2.5 py-1 rounded-full"
+            key={tech}
+            className="px-3 py-1 rounded-full text-xs font-semibold"
             style={{
-              backgroundColor: project.color + "18",
+              backgroundColor: project.color + "15",
               color: project.color,
-              border: `1px solid ${project.color}30`,
+              border: `1px solid ${project.color}25`,
             }}
           >
-            {t}
+            {tech}
           </span>
         ))}
       </div>
     </motion.div>
   );
 }
+
